@@ -13,9 +13,9 @@ class _GratefulState extends State<Grateful> {
   late String _selectedGrateful;
   late int _radioGroupValue;
 
-  void _radioOnChanged(int? index) {
+  void _radioOnChanged(int index) {
     setState(() {
-      _radioGroupValue = index!;
+      _radioGroupValue = index;
       _selectedGrateful = _gratefulList[index];
     });
   }
@@ -39,7 +39,7 @@ class _GratefulState extends State<Grateful> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(_selectedGrateful);
             },
             icon: const Icon(Icons.check),
           ),
@@ -48,29 +48,38 @@ class _GratefulState extends State<Grateful> {
 
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: RadioGroup(
-            onChanged: _radioOnChanged,
-            child: Row(
+          padding: const EdgeInsets.all(16.0),
+          child: RadioGroup<int>(
+            groupValue: _radioGroupValue,
+            onChanged: (int? value) {
+              if (value == null) {
+                return;
+              }
+              _radioOnChanged(value);
+            },
+            child: Column(
               children: [
-                Radio(
-                  value: 0,
-                  groupValue: widget.radioGroupValue,
-                  onChanged: _radioOnChanged,
+                ListTile(
+                  leading: const Radio<int>(value: 0),
+                  title: Text(
+                    _gratefulList[0],
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
                 ),
-                Text(_gratefulList[0], style: TextStyle(fontSize: 20.0)),
-                Radio(
-                  value: 1,
-                  groupValue: widget.radioGroupValue,
-                  onChanged: _radioOnChanged,
+                ListTile(
+                  leading: const Radio<int>(value: 1),
+                  title: Text(
+                    _gratefulList[1],
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
                 ),
-                Text(_gratefulList[1], style: TextStyle(fontSize: 20.0)),
-                Radio(
-                  value: 2,
-                  groupValue: widget.radioGroupValue,
-                  onChanged: _radioOnChanged,
+                ListTile(
+                  leading: const Radio<int>(value: 2),
+                  title: Text(
+                    _gratefulList[2],
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
                 ),
-                Text(_gratefulList[2], style: TextStyle(fontSize: 20.0)),
               ],
             ),
           ),

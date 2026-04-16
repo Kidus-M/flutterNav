@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'about.dart';
-import 'grateful.dart';
+// import 'about.dart';
+// import 'grateful.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -44,26 +44,27 @@ class _HomeState extends State<Home> {
     required BuildContext context,
     bool fullpageDialog = false,
   }) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const About(),
-        fullscreenDialog: fullpageDialog,
-      ),
-    );
+    Navigator.of(context).pushNamed('/about');
   }
 
   void _openGratefullPage({
     required BuildContext context,
-    bool fullpageDialog = false,
+    // bool fullpageDialog = false,
   }) async {
-    final result = await Navigator.of(context).push<String>(
-      MaterialPageRoute(
-        builder: (context) => const Grateful(radioGroupValue: 0),
-        fullscreenDialog: fullpageDialog,
-      ),
-    );
+    // final result = await Navigator.of(context).push<String>(
+    //   MaterialPageRoute(
+    //     builder: (context) => const Grateful(radioGroupValue: 0),
+    //     fullscreenDialog: fullpageDialog,
+    //   ),
+    // );
+
+    final result = await Navigator.of(context).pushNamed<String>('/grateful');
+    if (!mounted || result == null) {
+      return;
+    }
+
     setState(() {
-      _howareyou = result ?? "";
+      _howareyou = result;
     });
   }
 }
