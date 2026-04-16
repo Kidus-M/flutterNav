@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
   }) async {
     final result = await Navigator.of(context).push<String>(
       MaterialPageRoute(
-        builder: (context) => const Grateful(radioGroupValue: -1),
+        builder: (context) => const Grateful(radioGroupValue: 0),
         fullscreenDialog: fullpageDialog,
       ),
     );
