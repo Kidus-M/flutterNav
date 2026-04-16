@@ -9,8 +9,28 @@ class Grateful extends StatefulWidget {
 }
 
 class _GratefulState extends State<Grateful> {
+    final List<String> _gratefulList = List<String>();
+
+    void _radioOnChanged(int? index) 
+    {
+      
+    }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Grateful'),
+        actions: [
+          IconButton(
+            onPressed: () {Navigator.of(context).pop();},
+            icon: const Icon(Icons.check),
+          ),
+        ],
+      ),
+
+    )
   }
 }
