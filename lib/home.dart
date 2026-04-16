@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'about.dart';
 import 'grateful.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -19,29 +20,26 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
-            onPressed: () => _openAboutPage(
-              context : context,
-              fullpageDialog: true,
-            ),
+            onPressed: () =>
+                _openAboutPage(context: context, fullpageDialog: true),
           ),
         ],
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text("Gratefull for : $_howareyou")
+          child: Text("Gratefull for : $_howareyou"),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () => _openGratefullPage(context: context),
-          tooltip: "gratefull",
-          backgroundColor: Colors.purpleAccent,
-          child: const Icon(Icons.sentiment_satisfied),
-          
+        onPressed: () => _openGratefullPage(context: context),
+        tooltip: "gratefull",
+        backgroundColor: Colors.purpleAccent,
+        child: const Icon(Icons.sentiment_satisfied),
       ),
     );
   }
-  
+
   void _openAboutPage({
     required BuildContext context,
     bool fullpageDialog = false,
@@ -60,7 +58,7 @@ class _HomeState extends State<Home> {
   }) async {
     final result = await Navigator.of(context).push<String>(
       MaterialPageRoute(
-        builder: (context) => const Grateful(RadioGroupValue: -1),
+        builder: (context) => const Grateful(radioGroupValue: -1),
         fullscreenDialog: fullpageDialog,
       ),
     );

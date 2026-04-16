@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 
 class Grateful extends StatefulWidget {
-  final int RadioGroupValue;
-  const Grateful({super.key, required this.RadioGroupValue});
+  final int radioGroupValue;
+  const Grateful({super.key, required this.radioGroupValue});
 
   @override
   State<Grateful> createState() => _GratefulState();
 }
 
 class _GratefulState extends State<Grateful> {
-  final List<String> _gratefulList = ['God', 'Friends', 'Family'];
+  final List<String> _gratefulList = [];
+  late String _selectedGrateful;
+  late int _radioGroupValue;
 
   void _radioOnChanged(int? index) {
-    setState(() {});
+    setState(() {
+      _radioGroupValue = index!;
+      _selectedGrateful = _gratefulList[index];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _gratefulList
+      ..add('God')
+      ..add('Family')
+      ..add('Friends');
+    _radioGroupValue = widget.radioGroupValue;
+    _selectedGrateful = _gratefulList[_radioGroupValue];
   }
 
   @override
@@ -39,10 +55,22 @@ class _GratefulState extends State<Grateful> {
               children: [
                 Radio(
                   value: 0,
-                  groupValue: widget.RadioGroupValue,
+                  groupValue: widget.radioGroupValue,
                   onChanged: _radioOnChanged,
                 ),
                 Text(_gratefulList[0], style: TextStyle(fontSize: 20.0)),
+                Radio(
+                  value: 1,
+                  groupValue: widget.radioGroupValue,
+                  onChanged: _radioOnChanged,
+                ),
+                Text(_gratefulList[1], style: TextStyle(fontSize: 20.0)),
+                Radio(
+                  value: 2,
+                  groupValue: widget.radioGroupValue,
+                  onChanged: _radioOnChanged,
+                ),
+                Text(_gratefulList[2], style: TextStyle(fontSize: 20.0)),
               ],
             ),
           ),
